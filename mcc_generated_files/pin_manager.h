@@ -59,6 +59,126 @@
 #define PULL_UP_ENABLED      1
 #define PULL_UP_DISABLED     0
 
+// get/set OLED_CS aliases
+#define OLED_CS_TRIS                 TRISAbits.TRISA3
+#define OLED_CS_LAT                  LATAbits.LATA3
+#define OLED_CS_PORT                 PORTAbits.RA3
+#define OLED_CS_WPU                  WPUAbits.WPUA3
+#define OLED_CS_OD                   ODCONAbits.ODCA3
+#define OLED_CS_ANS                  ANSELAbits.ANSA3
+#define OLED_CS_SetHigh()            do { LATAbits.LATA3 = 1; } while(0)
+#define OLED_CS_SetLow()             do { LATAbits.LATA3 = 0; } while(0)
+#define OLED_CS_Toggle()             do { LATAbits.LATA3 = ~LATAbits.LATA3; } while(0)
+#define OLED_CS_GetValue()           PORTAbits.RA3
+#define OLED_CS_SetDigitalInput()    do { TRISAbits.TRISA3 = 1; } while(0)
+#define OLED_CS_SetDigitalOutput()   do { TRISAbits.TRISA3 = 0; } while(0)
+#define OLED_CS_SetPullup()          do { WPUAbits.WPUA3 = 1; } while(0)
+#define OLED_CS_ResetPullup()        do { WPUAbits.WPUA3 = 0; } while(0)
+#define OLED_CS_SetPushPull()        do { ODCONAbits.ODCA3 = 0; } while(0)
+#define OLED_CS_SetOpenDrain()       do { ODCONAbits.ODCA3 = 1; } while(0)
+#define OLED_CS_SetAnalogMode()      do { ANSELAbits.ANSA3 = 1; } while(0)
+#define OLED_CS_SetDigitalMode()     do { ANSELAbits.ANSA3 = 0; } while(0)
+
+// get/set SCK2 aliases
+#define SCK2_TRIS                 TRISBbits.TRISB1
+#define SCK2_LAT                  LATBbits.LATB1
+#define SCK2_PORT                 PORTBbits.RB1
+#define SCK2_WPU                  WPUBbits.WPUB1
+#define SCK2_OD                   ODCONBbits.ODCB1
+#define SCK2_ANS                  ANSELBbits.ANSB1
+#define SCK2_SetHigh()            do { LATBbits.LATB1 = 1; } while(0)
+#define SCK2_SetLow()             do { LATBbits.LATB1 = 0; } while(0)
+#define SCK2_Toggle()             do { LATBbits.LATB1 = ~LATBbits.LATB1; } while(0)
+#define SCK2_GetValue()           PORTBbits.RB1
+#define SCK2_SetDigitalInput()    do { TRISBbits.TRISB1 = 1; } while(0)
+#define SCK2_SetDigitalOutput()   do { TRISBbits.TRISB1 = 0; } while(0)
+#define SCK2_SetPullup()          do { WPUBbits.WPUB1 = 1; } while(0)
+#define SCK2_ResetPullup()        do { WPUBbits.WPUB1 = 0; } while(0)
+#define SCK2_SetPushPull()        do { ODCONBbits.ODCB1 = 0; } while(0)
+#define SCK2_SetOpenDrain()       do { ODCONBbits.ODCB1 = 1; } while(0)
+#define SCK2_SetAnalogMode()      do { ANSELBbits.ANSB1 = 1; } while(0)
+#define SCK2_SetDigitalMode()     do { ANSELBbits.ANSB1 = 0; } while(0)
+
+// get/set SDI2 aliases
+#define SDI2_TRIS                 TRISBbits.TRISB2
+#define SDI2_LAT                  LATBbits.LATB2
+#define SDI2_PORT                 PORTBbits.RB2
+#define SDI2_WPU                  WPUBbits.WPUB2
+#define SDI2_OD                   ODCONBbits.ODCB2
+#define SDI2_ANS                  ANSELBbits.ANSB2
+#define SDI2_SetHigh()            do { LATBbits.LATB2 = 1; } while(0)
+#define SDI2_SetLow()             do { LATBbits.LATB2 = 0; } while(0)
+#define SDI2_Toggle()             do { LATBbits.LATB2 = ~LATBbits.LATB2; } while(0)
+#define SDI2_GetValue()           PORTBbits.RB2
+#define SDI2_SetDigitalInput()    do { TRISBbits.TRISB2 = 1; } while(0)
+#define SDI2_SetDigitalOutput()   do { TRISBbits.TRISB2 = 0; } while(0)
+#define SDI2_SetPullup()          do { WPUBbits.WPUB2 = 1; } while(0)
+#define SDI2_ResetPullup()        do { WPUBbits.WPUB2 = 0; } while(0)
+#define SDI2_SetPushPull()        do { ODCONBbits.ODCB2 = 0; } while(0)
+#define SDI2_SetOpenDrain()       do { ODCONBbits.ODCB2 = 1; } while(0)
+#define SDI2_SetAnalogMode()      do { ANSELBbits.ANSB2 = 1; } while(0)
+#define SDI2_SetDigitalMode()     do { ANSELBbits.ANSB2 = 0; } while(0)
+
+// get/set SDO2 aliases
+#define SDO2_TRIS                 TRISBbits.TRISB3
+#define SDO2_LAT                  LATBbits.LATB3
+#define SDO2_PORT                 PORTBbits.RB3
+#define SDO2_WPU                  WPUBbits.WPUB3
+#define SDO2_OD                   ODCONBbits.ODCB3
+#define SDO2_ANS                  ANSELBbits.ANSB3
+#define SDO2_SetHigh()            do { LATBbits.LATB3 = 1; } while(0)
+#define SDO2_SetLow()             do { LATBbits.LATB3 = 0; } while(0)
+#define SDO2_Toggle()             do { LATBbits.LATB3 = ~LATBbits.LATB3; } while(0)
+#define SDO2_GetValue()           PORTBbits.RB3
+#define SDO2_SetDigitalInput()    do { TRISBbits.TRISB3 = 1; } while(0)
+#define SDO2_SetDigitalOutput()   do { TRISBbits.TRISB3 = 0; } while(0)
+#define SDO2_SetPullup()          do { WPUBbits.WPUB3 = 1; } while(0)
+#define SDO2_ResetPullup()        do { WPUBbits.WPUB3 = 0; } while(0)
+#define SDO2_SetPushPull()        do { ODCONBbits.ODCB3 = 0; } while(0)
+#define SDO2_SetOpenDrain()       do { ODCONBbits.ODCB3 = 1; } while(0)
+#define SDO2_SetAnalogMode()      do { ANSELBbits.ANSB3 = 1; } while(0)
+#define SDO2_SetDigitalMode()     do { ANSELBbits.ANSB3 = 0; } while(0)
+
+// get/set SW_HR aliases
+#define SW_HR_TRIS                 TRISBbits.TRISB4
+#define SW_HR_LAT                  LATBbits.LATB4
+#define SW_HR_PORT                 PORTBbits.RB4
+#define SW_HR_WPU                  WPUBbits.WPUB4
+#define SW_HR_OD                   ODCONBbits.ODCB4
+#define SW_HR_ANS                  ANSELBbits.ANSB4
+#define SW_HR_SetHigh()            do { LATBbits.LATB4 = 1; } while(0)
+#define SW_HR_SetLow()             do { LATBbits.LATB4 = 0; } while(0)
+#define SW_HR_Toggle()             do { LATBbits.LATB4 = ~LATBbits.LATB4; } while(0)
+#define SW_HR_GetValue()           PORTBbits.RB4
+#define SW_HR_SetDigitalInput()    do { TRISBbits.TRISB4 = 1; } while(0)
+#define SW_HR_SetDigitalOutput()   do { TRISBbits.TRISB4 = 0; } while(0)
+#define SW_HR_SetPullup()          do { WPUBbits.WPUB4 = 1; } while(0)
+#define SW_HR_ResetPullup()        do { WPUBbits.WPUB4 = 0; } while(0)
+#define SW_HR_SetPushPull()        do { ODCONBbits.ODCB4 = 0; } while(0)
+#define SW_HR_SetOpenDrain()       do { ODCONBbits.ODCB4 = 1; } while(0)
+#define SW_HR_SetAnalogMode()      do { ANSELBbits.ANSB4 = 1; } while(0)
+#define SW_HR_SetDigitalMode()     do { ANSELBbits.ANSB4 = 0; } while(0)
+
+// get/set OLED_DC aliases
+#define OLED_DC_TRIS                 TRISCbits.TRISC2
+#define OLED_DC_LAT                  LATCbits.LATC2
+#define OLED_DC_PORT                 PORTCbits.RC2
+#define OLED_DC_WPU                  WPUCbits.WPUC2
+#define OLED_DC_OD                   ODCONCbits.ODCC2
+#define OLED_DC_ANS                  ANSELCbits.ANSC2
+#define OLED_DC_SetHigh()            do { LATCbits.LATC2 = 1; } while(0)
+#define OLED_DC_SetLow()             do { LATCbits.LATC2 = 0; } while(0)
+#define OLED_DC_Toggle()             do { LATCbits.LATC2 = ~LATCbits.LATC2; } while(0)
+#define OLED_DC_GetValue()           PORTCbits.RC2
+#define OLED_DC_SetDigitalInput()    do { TRISCbits.TRISC2 = 1; } while(0)
+#define OLED_DC_SetDigitalOutput()   do { TRISCbits.TRISC2 = 0; } while(0)
+#define OLED_DC_SetPullup()          do { WPUCbits.WPUC2 = 1; } while(0)
+#define OLED_DC_ResetPullup()        do { WPUCbits.WPUC2 = 0; } while(0)
+#define OLED_DC_SetPushPull()        do { ODCONCbits.ODCC2 = 0; } while(0)
+#define OLED_DC_SetOpenDrain()       do { ODCONCbits.ODCC2 = 1; } while(0)
+#define OLED_DC_SetAnalogMode()      do { ANSELCbits.ANSC2 = 1; } while(0)
+#define OLED_DC_SetDigitalMode()     do { ANSELCbits.ANSC2 = 0; } while(0)
+
 // get/set SCL1 aliases
 #define SCL1_TRIS                 TRISCbits.TRISC3
 #define SCL1_LAT                  LATCbits.LATC3
@@ -98,6 +218,46 @@
 #define SDA1_SetOpenDrain()       do { ODCONCbits.ODCC4 = 1; } while(0)
 #define SDA1_SetAnalogMode()      do { ANSELCbits.ANSC4 = 1; } while(0)
 #define SDA1_SetDigitalMode()     do { ANSELCbits.ANSC4 = 0; } while(0)
+
+// get/set SW_MIN aliases
+#define SW_MIN_TRIS                 TRISCbits.TRISC5
+#define SW_MIN_LAT                  LATCbits.LATC5
+#define SW_MIN_PORT                 PORTCbits.RC5
+#define SW_MIN_WPU                  WPUCbits.WPUC5
+#define SW_MIN_OD                   ODCONCbits.ODCC5
+#define SW_MIN_ANS                  ANSELCbits.ANSC5
+#define SW_MIN_SetHigh()            do { LATCbits.LATC5 = 1; } while(0)
+#define SW_MIN_SetLow()             do { LATCbits.LATC5 = 0; } while(0)
+#define SW_MIN_Toggle()             do { LATCbits.LATC5 = ~LATCbits.LATC5; } while(0)
+#define SW_MIN_GetValue()           PORTCbits.RC5
+#define SW_MIN_SetDigitalInput()    do { TRISCbits.TRISC5 = 1; } while(0)
+#define SW_MIN_SetDigitalOutput()   do { TRISCbits.TRISC5 = 0; } while(0)
+#define SW_MIN_SetPullup()          do { WPUCbits.WPUC5 = 1; } while(0)
+#define SW_MIN_ResetPullup()        do { WPUCbits.WPUC5 = 0; } while(0)
+#define SW_MIN_SetPushPull()        do { ODCONCbits.ODCC5 = 0; } while(0)
+#define SW_MIN_SetOpenDrain()       do { ODCONCbits.ODCC5 = 1; } while(0)
+#define SW_MIN_SetAnalogMode()      do { ANSELCbits.ANSC5 = 1; } while(0)
+#define SW_MIN_SetDigitalMode()     do { ANSELCbits.ANSC5 = 0; } while(0)
+
+// get/set OLED_RST aliases
+#define OLED_RST_TRIS                 TRISDbits.TRISD0
+#define OLED_RST_LAT                  LATDbits.LATD0
+#define OLED_RST_PORT                 PORTDbits.RD0
+#define OLED_RST_WPU                  WPUDbits.WPUD0
+#define OLED_RST_OD                   ODCONDbits.ODCD0
+#define OLED_RST_ANS                  ANSELDbits.ANSD0
+#define OLED_RST_SetHigh()            do { LATDbits.LATD0 = 1; } while(0)
+#define OLED_RST_SetLow()             do { LATDbits.LATD0 = 0; } while(0)
+#define OLED_RST_Toggle()             do { LATDbits.LATD0 = ~LATDbits.LATD0; } while(0)
+#define OLED_RST_GetValue()           PORTDbits.RD0
+#define OLED_RST_SetDigitalInput()    do { TRISDbits.TRISD0 = 1; } while(0)
+#define OLED_RST_SetDigitalOutput()   do { TRISDbits.TRISD0 = 0; } while(0)
+#define OLED_RST_SetPullup()          do { WPUDbits.WPUD0 = 1; } while(0)
+#define OLED_RST_ResetPullup()        do { WPUDbits.WPUD0 = 0; } while(0)
+#define OLED_RST_SetPushPull()        do { ODCONDbits.ODCD0 = 0; } while(0)
+#define OLED_RST_SetOpenDrain()       do { ODCONDbits.ODCD0 = 1; } while(0)
+#define OLED_RST_SetAnalogMode()      do { ANSELDbits.ANSD0 = 1; } while(0)
+#define OLED_RST_SetDigitalMode()     do { ANSELDbits.ANSD0 = 0; } while(0)
 
 /**
    @Param
