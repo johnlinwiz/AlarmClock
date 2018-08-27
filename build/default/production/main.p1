@@ -6,6 +6,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
 "404 oled.h
 [v _OLED_Initialize `(v ~T0 @X0 0 ef ]
+"503
+[v _OLED_Clear `(v ~T0 @X0 0 ef ]
 "508
 [v _Write_String `(v ~T0 @X0 0 ef1`*uc ]
 [v F14918 `(v ~T0 @X0 1 tf1`ul ]
@@ -15623,79 +15625,85 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _welcomeMsg `uc ~T0 @X0 12  a ]
 [; ;main.c: 25: char welcomeMsg[] = "Alarm Clock";
 [e = _welcomeMsg F15397 ]
-[; ;main.c: 26: Write_String(welcomeMsg);
+[; ;main.c: 26: OLED_Clear();
 "26
-[e ( _Write_String (1 &U _welcomeMsg ]
-[; ;main.c: 27: _delay((unsigned long)((1000)*(1000000/4000.0)));
+[e ( _OLED_Clear ..  ]
+[; ;main.c: 27: Write_String(welcomeMsg);
 "27
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[e ( _Write_String (1 &U _welcomeMsg ]
+[; ;main.c: 28: _delay((unsigned long)((5000)*(1000000/4000.0)));
 "28
+[e ( __delay (1 -> * -> -> 5000 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+"29
 [v _getTime `Vl ~T0 @X0 1 a ]
 [v _setTime `Vl ~T0 @X0 1 a ]
-"30
+"31
 [v _tm_t `*S1621 ~T0 @X0 1 a ]
-"32
+"33
 [v _buffer `uc ~T0 @X0 -> 80 `i a ]
-[; ;main.c: 28: volatile time_t getTime, setTime;
-[; ;main.c: 30: struct tm *tm_t;
-[; ;main.c: 32: char buffer[80];
-[; ;main.c: 34: memset(tm_t, 0, sizeof (tm_t));
-"34
+[; ;main.c: 29: volatile time_t getTime, setTime;
+[; ;main.c: 31: struct tm *tm_t;
+[; ;main.c: 33: char buffer[80];
+[; ;main.c: 35: memset(tm_t, 0, sizeof (tm_t));
+"35
 [e ( _memset (3 , , -> _tm_t `*v -> 0 `i -> # _tm_t `ui ]
-[; ;main.c: 37: setTime = 1503870020;
-"37
-[e = _setTime -> 1503870020 `l ]
-[; ;main.c: 38: getTime = 0;
+[; ;main.c: 38: setTime = 1503870020;
 "38
+[e = _setTime -> 1503870020 `l ]
+[; ;main.c: 39: getTime = 0;
+"39
 [e = _getTime -> -> 0 `i `l ]
-[; ;main.c: 40: while (1) {
+[; ;main.c: 40: OLED_Clear();
 "40
+[e ( _OLED_Clear ..  ]
+[; ;main.c: 41: while (1) {
+"41
 [e :U 1625 ]
 {
-[; ;main.c: 42: rtc6_SetTime(setTime);
-"42
-[e ( _rtc6_SetTime (1 _setTime ]
-[; ;main.c: 43: _delay((unsigned long)((20)*(1000000/4000.0)));
+[; ;main.c: 43: rtc6_SetTime(setTime);
 "43
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[e ( _rtc6_SetTime (1 _setTime ]
+[; ;main.c: 44: _delay((unsigned long)((20)*(1000000/4000.0)));
 "44
-[v _timeStr `uc ~T0 @X0 -> 0 `x a ]
-[; ;main.c: 44: char timeStr[];
-[; ;main.c: 45: while (1) {
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
 "45
+[v _timeStr `uc ~T0 @X0 -> 0 `x a ]
+[; ;main.c: 45: char timeStr[];
+[; ;main.c: 46: while (1) {
+"46
 [e :U 1628 ]
 {
-[; ;main.c: 47: getTime = rtc6_GetTime();
-"47
-[e = _getTime ( _rtc6_GetTime ..  ]
-[; ;main.c: 48: tm_t = localtime(&getTime);
+[; ;main.c: 48: getTime = rtc6_GetTime();
 "48
-[e = _tm_t ( _localtime (1 -> &U _getTime `*Cl ]
-[; ;main.c: 49: sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d\n", tm_t->tm_year+1900, tm_t->tm_mon+1, tm_t->tm_mday, tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
+[e = _getTime ( _rtc6_GetTime ..  ]
+[; ;main.c: 49: tm_t = localtime(&getTime);
 "49
-[e ( _sprintf (1 , , , , , , (. , &U _timeStr :s 1C + . *U _tm_t 5 -> 1900 `i + . *U _tm_t 4 -> 1 `i . *U _tm_t 3 . *U _tm_t 2 . *U _tm_t 1 . *U _tm_t 0 ]
-[; ;main.c: 50: Write_String(timeStr);
+[e = _tm_t ( _localtime (1 -> &U _getTime `*Cl ]
+[; ;main.c: 50: sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d\n", tm_t->tm_year+1900, tm_t->tm_mon+1, tm_t->tm_mday, tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
 "50
-[e ( _Write_String (1 &U _timeStr ]
-[; ;main.c: 51: _delay((unsigned long)((1000)*(1000000/4000.0)));
+[e ( _sprintf (1 , , , , , , (. , &U _timeStr :s 1C + . *U _tm_t 5 -> 1900 `i + . *U _tm_t 4 -> 1 `i . *U _tm_t 3 . *U _tm_t 2 . *U _tm_t 1 . *U _tm_t 0 ]
+[; ;main.c: 51: Write_String(timeStr);
 "51
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[e ( _Write_String (1 &U _timeStr ]
+[; ;main.c: 52: _delay((unsigned long)((1000)*(1000000/4000.0)));
 "52
-}
-[e :U 1627 ]
-"45
-[e $U 1628  ]
-[e :U 1629 ]
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
 "53
 }
+[e :U 1627 ]
+"46
+[e $U 1628  ]
+[e :U 1629 ]
+"54
+}
 [e :U 1624 ]
-"40
+"41
 [e $U 1625  ]
 [e :U 1626 ]
-[; ;main.c: 52: }
 [; ;main.c: 53: }
 [; ;main.c: 54: }
-"54
+[; ;main.c: 55: }
+"55
 [e :UE 1623 ]
 }
 [p f _sprintf 8421508 ]

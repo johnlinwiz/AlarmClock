@@ -18742,8 +18742,9 @@ OLED_Initialize();
 
 # 25
 char welcomeMsg[] = "Alarm Clock";
+OLED_Clear();
 Write_String(welcomeMsg);
-_delay((unsigned long)((1000)*(1000000/4000.0)));
+_delay((unsigned long)((5000)*(1000000/4000.0)));
 volatile time_t getTime, setTime;
 
 struct tm *tm_t;
@@ -18755,7 +18756,7 @@ memset(tm_t, 0, sizeof (tm_t));
 
 setTime = 1503870020;
 getTime = 0;
-
+OLED_Clear();
 while (1) {
 
 rtc6_SetTime(setTime);

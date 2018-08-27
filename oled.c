@@ -106,7 +106,6 @@ void OLED_Clear( void)
 }
 
 void Write_String(char message[]){
-    OLED_Clear();
     size_t len = strlen(message);
     sprintf(CharacterArray, message);
     Modify_Data(CharacterArray, 0, len);

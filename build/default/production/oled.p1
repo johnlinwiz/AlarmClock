@@ -15945,92 +15945,89 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _Write_String ]
 [v _message `*uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;oled.c: 109: OLED_Clear();
 "109
-[e ( _OLED_Clear ..  ]
-"110
 [v _len `ui ~T0 @X0 1 a ]
-[; ;oled.c: 110: size_t len = strlen(message);
+[; ;oled.c: 109: size_t len = strlen(message);
 [e = _len ( _strlen (1 -> _message `*Cuc ]
-[; ;oled.c: 111: sprintf(CharacterArray, message);
-"111
+[; ;oled.c: 110: sprintf(CharacterArray, message);
+"110
 [e ( _sprintf (1 , &U _CharacterArray -> _message `*Cuc ]
-[; ;oled.c: 112: Modify_Data(CharacterArray, 0, len);
-"112
+[; ;oled.c: 111: Modify_Data(CharacterArray, 0, len);
+"111
 [e ( _Modify_Data (3 , , &U _CharacterArray -> -> 0 `i `ui _len ]
-[; ;oled.c: 113: OLED_PutPicture(displayArray);
-"113
+[; ;oled.c: 112: OLED_PutPicture(displayArray);
+"112
 [e ( _OLED_PutPicture (1 -> &U _displayArray `*Cuc ]
-[; ;oled.c: 114: }
-"114
+[; ;oled.c: 113: }
+"113
 [e :UE 1645 ]
 }
-"116
+"115
 [v _Modify_Data `(v ~T0 @X0 1 ef3`*uc`ui`ui ]
-"117
-{
-[; ;oled.c: 116: void Modify_Data(char c[], unsigned int offset, unsigned int limit)
-[; ;oled.c: 117: {
-[e :U _Modify_Data ]
 "116
+{
+[; ;oled.c: 115: void Modify_Data(char c[], unsigned int offset, unsigned int limit)
+[; ;oled.c: 116: {
+[e :U _Modify_Data ]
+"115
 [v _c `*uc ~T0 @X0 1 r1 ]
 [v _offset `ui ~T0 @X0 1 r2 ]
 [v _limit `ui ~T0 @X0 1 r3 ]
-"117
+"116
 [f ]
-"120
+"119
 [v _j `ui ~T0 @X0 1 a ]
-[; ;oled.c: 120: unsigned int j;
-[; ;oled.c: 121: for(int p=0;p<=limit;p++)
-"121
+[; ;oled.c: 119: unsigned int j;
+[; ;oled.c: 120: for(int p=0;p<=limit;p++)
+"120
 {
 [v _p `i ~T0 @X0 1 a ]
 [e = _p -> 0 `i ]
 [e $U 1650  ]
-"122
+"121
 [e :U 1647 ]
-[; ;oled.c: 122: {
+[; ;oled.c: 121: {
 {
-[; ;oled.c: 123: for(j=0;j<5;j++)
-"123
+[; ;oled.c: 122: for(j=0;j<5;j++)
+"122
 {
 [e = _j -> -> 0 `i `ui ]
 [e $ < _j -> -> 5 `i `ui 1651  ]
 [e $U 1652  ]
-"124
-[e :U 1651 ]
-[; ;oled.c: 124: {
-{
-"125
-[v _right `i ~T0 @X0 1 a ]
-[; ;oled.c: 125: int right;
-[; ;oled.c: 126: right=(j+((int)(c[p])-0x20)*5);
-"126
-[e = _right -> + _j -> * - -> *U + _c * -> _p `x -> -> # *U _c `i `x `i -> 32 `i -> 5 `i `ui `i ]
-[; ;oled.c: 127: displayArray[offset+j+(p*5)]=lookup[right];
-"127
-[e = *U + &U _displayArray * -> + + _offset _j -> * _p -> 5 `i `ui `ux -> -> # *U &U _displayArray `ui `ux *U + &U _lookup * -> -> _right `ui `ux -> -> # *U &U _lookup `ui `ux ]
-"128
-}
 "123
+[e :U 1651 ]
+[; ;oled.c: 123: {
+{
+"124
+[v _right `i ~T0 @X0 1 a ]
+[; ;oled.c: 124: int right;
+[; ;oled.c: 125: right=(j+((int)(c[p])-0x20)*5);
+"125
+[e = _right -> + _j -> * - -> *U + _c * -> _p `x -> -> # *U _c `i `x `i -> 32 `i -> 5 `i `ui `i ]
+[; ;oled.c: 126: displayArray[offset+j+(p*5)]=lookup[right];
+"126
+[e = *U + &U _displayArray * -> + + _offset _j -> * _p -> 5 `i `ui `ux -> -> # *U &U _displayArray `ui `ux *U + &U _lookup * -> -> _right `ui `ux -> -> # *U &U _lookup `ui `ux ]
+"127
+}
+"122
 [e ++ _j -> -> 1 `i `ui ]
 [e $ < _j -> -> 5 `i `ui 1651  ]
 [e :U 1652 ]
+"127
+}
 "128
 }
-"129
-}
-"121
+"120
 [e ++ _p -> 1 `i ]
 [e :U 1650 ]
 [e $ <= -> _p `ui _limit 1647  ]
 [e :U 1648 ]
-"129
+"128
 }
+[; ;oled.c: 127: }
 [; ;oled.c: 128: }
 [; ;oled.c: 129: }
-[; ;oled.c: 130: }
-"130
+"129
 [e :UE 1646 ]
 }
 [p f _sprintf 9437696 ]

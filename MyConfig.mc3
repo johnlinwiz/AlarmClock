@@ -2433,7 +2433,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="RTC6" name="generateExample"/>
-         <value>enabled</value>
+         <value>disabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="LATC" settingAlias="LATC7"/>
@@ -8382,10 +8382,6 @@
          <hash>eddfb6d25996a2afda8b38cc90f87afeda51b183a2b96cb09fae48d1fb7d720a</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\RTC6_example.c</file>
-         <hash>f3c29225767440c501f241237e64f56164a051509d8f6faf8f36737f8055855f</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\drivers\i2c_master.h</file>
          <hash>36bb84ccc499f248a7106908086742739d3326d5e3ce09542993bafe4de7a79d</hash>
       </entry>
@@ -8452,10 +8448,6 @@
       <entry>
          <file>mcc_generated_files\mcc.c</file>
          <hash>6208f40e341d36d5152c1bdeb3b4ca9337fec4779734b88f29e4e1a8814c2a16</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\RTC6_example.h</file>
-         <hash>24e29552e72b372e6ca8fa66d6b31c170e63bcdfe925e0061459f98d14b1f88c</hash>
       </entry>
    </generatedFileHashHistoryMap>
 </config>

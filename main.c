@@ -22,7 +22,8 @@ void main(void)
 
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
-    char welcomeMsg[] = "Alarm Clock";
+    char welcomeMsg[] = "Alarm Clock";    
+    OLED_Clear();
     Write_String(welcomeMsg);
     __delay_ms(1000);
     volatile time_t getTime, setTime;
@@ -35,8 +36,8 @@ void main(void)
 
     /*** Variable Initializations ***/
     setTime = 1503870020; //Time in Seconds
-    getTime = 0; //Time in Seconds   
-    
+    getTime = 0; //Time in Seconds       
+    OLED_Clear();
     while (1) {
         /** Example to Set Time to RTCC */
         rtc6_SetTime(setTime);
