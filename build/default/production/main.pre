@@ -18734,29 +18734,31 @@ void Write_String(char message[]);
 void Modify_Data(char c[], unsigned int offset, unsigned int limit);
 
 # 5 "main.c"
+void SetupClock();
+
 void main(void)
 {
 
 SYSTEM_Initialize();
 OLED_Initialize();
+SetupClock();
 
-# 25
+# 28
 char welcomeMsg[] = "Alarm Clock";
 OLED_Clear();
 Write_String(welcomeMsg);
-_delay((unsigned long)((5000)*(1000000/4000.0)));
+
+_delay((unsigned long)((1000)*(1000000/4000.0)));
+OLED_Clear();
 volatile time_t getTime, setTime;
 
 struct tm *tm_t;
-
-char buffer[80];
 
 memset(tm_t, 0, sizeof (tm_t));
 
 
 setTime = 1503870020;
 getTime = 0;
-OLED_Clear();
 while (1) {
 
 rtc6_SetTime(setTime);
@@ -18768,7 +18770,9 @@ getTime = rtc6_GetTime();
 tm_t = localtime(&getTime);
 sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d\n", tm_t->tm_year+1900, tm_t->tm_mon+1, tm_t->tm_mday, tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
 Write_String(timeStr);
-_delay((unsigned long)((1000)*(1000000/4000.0)));
 }
 }
+}
+
+void SetupClock(){
 }

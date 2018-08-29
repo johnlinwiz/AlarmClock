@@ -2,11 +2,14 @@
 #include "mcc_generated_files/RTC6.h"
 #include "oled.h"
 
+void SetupClock();
+
 void main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
     OLED_Initialize();
+    SetupClock();
     
     // When using interrupts, you need to set the Global and Peripheral Interrupt Enable bits
     // Use the following macros to:
@@ -25,19 +28,18 @@ void main(void)
     char welcomeMsg[] = "Alarm Clock";    
     OLED_Clear();
     Write_String(welcomeMsg);
-    __delay_ms(1000);
+    
+    __delay_ms(1000); 
+    OLED_Clear();
     volatile time_t getTime, setTime;
 
     struct tm *tm_t;
-
-    char buffer[80];
 
     memset(tm_t, 0, sizeof (tm_t));
 
     /*** Variable Initializations ***/
     setTime = 1503870020; //Time in Seconds
-    getTime = 0; //Time in Seconds       
-    OLED_Clear();
+    getTime = 0; //Time in Seconds   
     while (1) {
         /** Example to Set Time to RTCC */
         rtc6_SetTime(setTime);
@@ -49,7 +51,9 @@ void main(void)
             tm_t = localtime(&getTime);
             sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d\n", tm_t->tm_year+1900, tm_t->tm_mon+1, tm_t->tm_mday, tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
             Write_String(timeStr);
-            __delay_ms(1000);
         }
     }
+}
+
+void SetupClock(){    
 }
