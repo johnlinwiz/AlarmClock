@@ -11,49 +11,31 @@ void main(void)
     OLED_Initialize();
     SetupClock();
     
-    // When using interrupts, you need to set the Global and Peripheral Interrupt Enable bits
-    // Use the following macros to:
+    INTERRUPT_GlobalInterruptEnable();
 
-    // Enable the Global Interrupts
-    //INTERRUPT_GlobalInterruptEnable();
-
-    // Enable the Peripheral Interrupts
-    //INTERRUPT_PeripheralInterruptEnable();
-
-    // Disable the Global Interrupts
-    //INTERRUPT_GlobalInterruptDisable();
-
-    // Disable the Peripheral Interrupts
-    //INTERRUPT_PeripheralInterruptDisable();
-    char welcomeMsg[] = "Alarm Clock";    
-    OLED_Clear();
-    Write_String(welcomeMsg);
+    INTERRUPT_PeripheralInterruptEnable();
     
-    __delay_ms(1000); 
-    OLED_Clear();
-    volatile time_t getTime, setTime;
-
+    volatile time_t getTime;
     struct tm *tm_t;
-
-    memset(tm_t, 0, sizeof (tm_t));
-
-    /*** Variable Initializations ***/
-    setTime = 1503870020; //Time in Seconds
-    getTime = 0; //Time in Seconds   
+    char timeStr[];
     while (1) {
-        /** Example to Set Time to RTCC */
-        rtc6_SetTime(setTime);
-        __delay_ms(20);
-        char timeStr[];
-        while (1) {
-            /** Example to Get Time from RTCC */
-            getTime = rtc6_GetTime();
-            tm_t = localtime(&getTime);
-            sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d\n", tm_t->tm_year+1900, tm_t->tm_mon+1, tm_t->tm_mday, tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
-            Write_String(timeStr);
-        }
+        getTime = rtc6_GetTime();
+        tm_t = localtime(&getTime);
+        sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d\n", tm_t->tm_year+1900, tm_t->tm_mon+1, tm_t->tm_mday, tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
+        Write_String(timeStr);
     }
 }
 
-void SetupClock(){    
+void SetupClock(){
+    volatile time_t setTime;
+    struct tm initialTime;
+    initialTime.tm_hour = 22;
+    initialTime.tm_min = 53;
+    initialTime.tm_sec = 0;
+    initialTime.tm_year = 99;
+    initialTime.tm_mon = 8;
+    initialTime.tm_mday = 28;
+    
+    rtc6_SetTime(setTime);
+    __delay_ms(20); 
 }

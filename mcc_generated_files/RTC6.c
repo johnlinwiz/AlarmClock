@@ -156,6 +156,15 @@ void rtc6_SetTime(time_t t) {
     rtc6_SetComponent(RTCC_HOUR, 0x00, tm_t->tm_hour);
 }
 
+void rtc6_SetTime2(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min){
+    rtc6_SetComponent(RTCC_YEAR, 0x00, year % 100); // RTC only has two digits for year
+    rtc6_SetComponent(RTCC_MONTH, 0xD0, month); // time.h gives January as zero, clock expects 1
+    rtc6_SetComponent(RTCC_DATE, 0x00, day);
+    rtc6_SetComponent(RTCC_MINUTES, 0x00, min);
+    rtc6_SetComponent(RTCC_SECONDS, 0x80, 0);
+    rtc6_SetComponent(RTCC_HOUR, 0x00, hour);    
+}
+
 static uint8_t rtc6_GetComponent(uint8_t location, uint8_t mask){
     uint8_t working = rtcc_read(location) & mask;
     return (working & 0x0F) + (((working & (mask & 0xF0)) >> 4) * 10);

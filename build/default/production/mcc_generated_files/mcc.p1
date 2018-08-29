@@ -13860,9 +13860,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC6.h: 41: void rtc6_ClearAlarm0(void);
 [; ;RTC6.h: 42: void rtc6_ClearAlarm1(void);
 [; ;RTC6.h: 44: void rtc6_SetTime(time_t);
-[; ;RTC6.h: 45: time_t rtc6_GetTime(void);
-[; ;RTC6.h: 47: uint8_t rtc6_ReadByteEEPROM(uint8_t addr);
-[; ;RTC6.h: 48: void rtc6_WriteByteEEPROM(uint8_t addr, uint8_t data);
+[; ;RTC6.h: 45: void rtc6_SetTime2(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min);
+[; ;RTC6.h: 46: time_t rtc6_GetTime(void);
+[; ;RTC6.h: 48: uint8_t rtc6_ReadByteEEPROM(uint8_t addr);
+[; ;RTC6.h: 49: void rtc6_WriteByteEEPROM(uint8_t addr, uint8_t data);
 [; ;i2c_types.h: 29: typedef enum {
 [; ;i2c_types.h: 30: I2C_NOERR,
 [; ;i2c_types.h: 31: I2C_BUSY,

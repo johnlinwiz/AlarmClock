@@ -8,27 +8,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _OLED_Initialize `(v ~T0 @X0 0 ef ]
 "5 main.c
 [v _SetupClock `(v ~T0 @X0 0 ef ]
-"503 oled.h
-[v _OLED_Clear `(v ~T0 @X0 0 ef ]
-"508
-[v _Write_String `(v ~T0 @X0 0 ef1`*uc ]
-[v F14918 `(v ~T0 @X0 1 tf1`ul ]
-"153 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic.h
-[v __delay `JF14918 ~T0 @X0 0 e ]
-[p i __delay ]
+"355 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic16f18875.h
+[s S26 :1 `uc 1 :5 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S26 . INTEDG . PEIE GIE ]
+"354
+[u S25 `S26 1 ]
+[n S25 . . ]
+"362
+[v _INTCONbits `VS25 ~T0 @X0 0 e@11 ]
 "9 C:\Program Files (x86)\Microchip\xc8\v1.45\include\time.h
 [s S1621 `i 1 `i 1 `i 1 `i 1 `i 1 `i 1 `i 1 `i 1 `i 1 ]
 [n S1621 tm tm_sec tm_min tm_hour tm_mday tm_mon tm_year tm_wday tm_yday tm_isdst ]
-"16 C:\Program Files (x86)\Microchip\xc8\v1.45\include\string.h
-[v _memset `(*v ~T0 @X0 0 ef3`*v`i`ui ]
-"44 mcc_generated_files/RTC6.h
-[v _rtc6_SetTime `(v ~T0 @X0 0 ef1`l ]
-"45
+"46 mcc_generated_files/RTC6.h
 [v _rtc6_GetTime `(l ~T0 @X0 0 ef ]
 "50 C:\Program Files (x86)\Microchip\xc8\v1.45\include\time.h
 [v _localtime `(*S1621 ~T0 @X0 0 ef1`*Cl ]
 "194 C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdio.h
 [v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
+"508 oled.h
+[v _Write_String `(v ~T0 @X0 0 ef1`*uc ]
+"44 mcc_generated_files/RTC6.h
+[v _rtc6_SetTime `(v ~T0 @X0 0 ef1`l ]
+[v F14918 `(v ~T0 @X0 1 tf1`ul ]
+"153 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic.h
+[v __delay `JF14918 ~T0 @X0 0 e ]
+[p i __delay ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -13856,9 +13860,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC6.h: 41: void rtc6_ClearAlarm0(void);
 [; ;RTC6.h: 42: void rtc6_ClearAlarm1(void);
 [; ;RTC6.h: 44: void rtc6_SetTime(time_t);
-[; ;RTC6.h: 45: time_t rtc6_GetTime(void);
-[; ;RTC6.h: 47: uint8_t rtc6_ReadByteEEPROM(uint8_t addr);
-[; ;RTC6.h: 48: void rtc6_WriteByteEEPROM(uint8_t addr, uint8_t data);
+[; ;RTC6.h: 45: void rtc6_SetTime2(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min);
+[; ;RTC6.h: 46: time_t rtc6_GetTime(void);
+[; ;RTC6.h: 48: uint8_t rtc6_ReadByteEEPROM(uint8_t addr);
+[; ;RTC6.h: 49: void rtc6_WriteByteEEPROM(uint8_t addr, uint8_t data);
 [; ;i2c_types.h: 29: typedef enum {
 [; ;i2c_types.h: 30: I2C_NOERR,
 [; ;i2c_types.h: 31: I2C_BUSY,
@@ -15610,111 +15615,87 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 12: SetupClock();
 "12
 [e ( _SetupClock ..  ]
-[v F15398 `uc ~T0 @X0 -> 0 `x s ]
-[i F15398
-:U ..
--> 65 `c
--> 108 `c
--> 97 `c
--> 114 `c
--> 109 `c
--> 32 `c
--> 67 `c
--> 108 `c
--> 111 `c
--> 99 `c
--> 107 `c
--> 0 `c
-..
-]
-"28
-[v _welcomeMsg `uc ~T0 @X0 12  a ]
-[; ;main.c: 28: char welcomeMsg[] = "Alarm Clock";
-[e = _welcomeMsg F15398 ]
-[; ;main.c: 29: OLED_Clear();
-"29
-[e ( _OLED_Clear ..  ]
-[; ;main.c: 30: Write_String(welcomeMsg);
-"30
-[e ( _Write_String (1 &U _welcomeMsg ]
-[; ;main.c: 32: _delay((unsigned long)((1000)*(1000000/4000.0)));
-"32
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
-[; ;main.c: 33: OLED_Clear();
-"33
-[e ( _OLED_Clear ..  ]
-"34
+[; ;main.c: 14: (INTCONbits.GIE = 1);
+"14
+[e = . . _INTCONbits 0 3 -> -> 1 `i `uc ]
+[; ;main.c: 16: (INTCONbits.PEIE = 1);
+"16
+[e = . . _INTCONbits 0 2 -> -> 1 `i `uc ]
+"18
 [v _getTime `Vl ~T0 @X0 1 a ]
-[v _setTime `Vl ~T0 @X0 1 a ]
-"36
+"19
 [v _tm_t `*S1621 ~T0 @X0 1 a ]
-[; ;main.c: 34: volatile time_t getTime, setTime;
-[; ;main.c: 36: struct tm *tm_t;
-[; ;main.c: 38: memset(tm_t, 0, sizeof (tm_t));
-"38
-[e ( _memset (3 , , -> _tm_t `*v -> 0 `i -> # _tm_t `ui ]
-[; ;main.c: 41: setTime = 1503870020;
-"41
-[e = _setTime -> 1503870020 `l ]
-[; ;main.c: 42: getTime = 0;
-"42
-[e = _getTime -> -> 0 `i `l ]
-[; ;main.c: 43: while (1) {
-"43
+"20
+[v _timeStr `uc ~T0 @X0 -> 0 `x a ]
+[; ;main.c: 18: volatile time_t getTime;
+[; ;main.c: 19: struct tm *tm_t;
+[; ;main.c: 20: char timeStr[];
+[; ;main.c: 21: while (1) {
+"21
 [e :U 1625 ]
 {
-[; ;main.c: 45: rtc6_SetTime(setTime);
-"45
-[e ( _rtc6_SetTime (1 _setTime ]
-[; ;main.c: 46: _delay((unsigned long)((20)*(1000000/4000.0)));
-"46
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
-"47
-[v _timeStr `uc ~T0 @X0 -> 0 `x a ]
-[; ;main.c: 47: char timeStr[];
-[; ;main.c: 48: while (1) {
-"48
-[e :U 1628 ]
-{
-[; ;main.c: 50: getTime = rtc6_GetTime();
-"50
+[; ;main.c: 22: getTime = rtc6_GetTime();
+"22
 [e = _getTime ( _rtc6_GetTime ..  ]
-[; ;main.c: 51: tm_t = localtime(&getTime);
-"51
+[; ;main.c: 23: tm_t = localtime(&getTime);
+"23
 [e = _tm_t ( _localtime (1 -> &U _getTime `*Cl ]
-[; ;main.c: 52: sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d\n", tm_t->tm_year+1900, tm_t->tm_mon+1, tm_t->tm_mday, tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
-"52
+[; ;main.c: 24: sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d\n", tm_t->tm_year+1900, tm_t->tm_mon+1, tm_t->tm_mday, tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
+"24
 [e ( _sprintf (1 , , , , , , (. , &U _timeStr :s 1C + . *U _tm_t 5 -> 1900 `i + . *U _tm_t 4 -> 1 `i . *U _tm_t 3 . *U _tm_t 2 . *U _tm_t 1 . *U _tm_t 0 ]
-[; ;main.c: 53: Write_String(timeStr);
-"53
+[; ;main.c: 25: Write_String(timeStr);
+"25
 [e ( _Write_String (1 &U _timeStr ]
-"54
-}
-[e :U 1627 ]
-"48
-[e $U 1628  ]
-[e :U 1629 ]
-"55
+"26
 }
 [e :U 1624 ]
-"43
+"21
 [e $U 1625  ]
 [e :U 1626 ]
-[; ;main.c: 54: }
-[; ;main.c: 55: }
-[; ;main.c: 56: }
-"56
+[; ;main.c: 26: }
+[; ;main.c: 27: }
+"27
 [e :UE 1623 ]
 }
-"58
+"29
 [v _SetupClock `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 58: void SetupClock(){
+[; ;main.c: 29: void SetupClock(){
 [e :U _SetupClock ]
 [f ]
-[; ;main.c: 59: }
-"59
-[e :UE 1630 ]
+"30
+[v _setTime `Vl ~T0 @X0 1 a ]
+"31
+[v _initialTime `S1621 ~T0 @X0 1 a ]
+[; ;main.c: 30: volatile time_t setTime;
+[; ;main.c: 31: struct tm initialTime;
+[; ;main.c: 32: initialTime.tm_hour = 22;
+"32
+[e = . _initialTime 2 -> 22 `i ]
+[; ;main.c: 33: initialTime.tm_min = 53;
+"33
+[e = . _initialTime 1 -> 53 `i ]
+[; ;main.c: 34: initialTime.tm_sec = 0;
+"34
+[e = . _initialTime 0 -> 0 `i ]
+[; ;main.c: 35: initialTime.tm_year = 99;
+"35
+[e = . _initialTime 5 -> 99 `i ]
+[; ;main.c: 36: initialTime.tm_mon = 8;
+"36
+[e = . _initialTime 4 -> 8 `i ]
+[; ;main.c: 37: initialTime.tm_mday = 28;
+"37
+[e = . _initialTime 3 -> 28 `i ]
+[; ;main.c: 39: rtc6_SetTime(setTime);
+"39
+[e ( _rtc6_SetTime (1 _setTime ]
+[; ;main.c: 40: _delay((unsigned long)((20)*(1000000/4000.0)));
+"40
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[; ;main.c: 41: }
+"41
+[e :UE 1627 ]
 }
 [p f _sprintf 8421508 ]
 [a 1C 37 48 52 100 45 37 48 50 100 45 37 48 50 100 32 37 48 50 100 58 37 48 50 100 58 37 48 50 100 10 0 ]

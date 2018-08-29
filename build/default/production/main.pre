@@ -18479,6 +18479,7 @@ void rtc6_ClearAlarm0(void);
 void rtc6_ClearAlarm1(void);
 
 void rtc6_SetTime(time_t);
+void rtc6_SetTime2(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min);
 time_t rtc6_GetTime(void);
 
 uint8_t rtc6_ReadByteEEPROM(uint8_t addr);
@@ -18743,36 +18744,31 @@ SYSTEM_Initialize();
 OLED_Initialize();
 SetupClock();
 
-# 28
-char welcomeMsg[] = "Alarm Clock";
-OLED_Clear();
-Write_String(welcomeMsg);
+(INTCONbits.GIE = 1);
 
-_delay((unsigned long)((1000)*(1000000/4000.0)));
-OLED_Clear();
-volatile time_t getTime, setTime;
+(INTCONbits.PEIE = 1);
 
+volatile time_t getTime;
 struct tm *tm_t;
-
-memset(tm_t, 0, sizeof (tm_t));
-
-
-setTime = 1503870020;
-getTime = 0;
-while (1) {
-
-rtc6_SetTime(setTime);
-_delay((unsigned long)((20)*(1000000/4000.0)));
 char timeStr[];
 while (1) {
-
 getTime = rtc6_GetTime();
 tm_t = localtime(&getTime);
 sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d\n", tm_t->tm_year+1900, tm_t->tm_mon+1, tm_t->tm_mday, tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
 Write_String(timeStr);
 }
 }
-}
 
 void SetupClock(){
+volatile time_t setTime;
+struct tm initialTime;
+initialTime.tm_hour = 22;
+initialTime.tm_min = 53;
+initialTime.tm_sec = 0;
+initialTime.tm_year = 99;
+initialTime.tm_mon = 8;
+initialTime.tm_mday = 28;
+
+rtc6_SetTime(setTime);
+_delay((unsigned long)((20)*(1000000/4000.0)));
 }

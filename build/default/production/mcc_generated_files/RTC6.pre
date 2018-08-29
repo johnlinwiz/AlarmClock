@@ -180,6 +180,7 @@ void rtc6_ClearAlarm0(void);
 void rtc6_ClearAlarm1(void);
 
 void rtc6_SetTime(time_t);
+void rtc6_SetTime2(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min);
 time_t rtc6_GetTime(void);
 
 uint8_t rtc6_ReadByteEEPROM(uint8_t addr);
@@ -18657,6 +18658,15 @@ rtc6_SetComponent(0x04, 0x00, tm_t->tm_mday);
 rtc6_SetComponent(0x01, 0x00, tm_t->tm_min);
 rtc6_SetComponent(0x00, 0x80, tm_t->tm_sec);
 rtc6_SetComponent(0x02, 0x00, tm_t->tm_hour);
+}
+
+void rtc6_SetTime2(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min){
+rtc6_SetComponent(0x06, 0x00, year % 100);
+rtc6_SetComponent(0x05, 0xD0, month);
+rtc6_SetComponent(0x04, 0x00, day);
+rtc6_SetComponent(0x01, 0x00, min);
+rtc6_SetComponent(0x00, 0x80, 0);
+rtc6_SetComponent(0x02, 0x00, hour);
 }
 
 static uint8_t rtc6_GetComponent(uint8_t location, uint8_t mask){
