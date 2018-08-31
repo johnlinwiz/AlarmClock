@@ -143,10 +143,8 @@ static void rtc6_SetComponent(uint8_t location, uint8_t mask, uint8_t time){
 }
 
 void rtc6_SetTime(time_t t) {
-
     struct tm *tm_t;
     memset(tm_t, 0, sizeof (tm_t));
-
     tm_t = localtime(&t);
     rtc6_SetComponent(RTCC_YEAR, 0x00, tm_t->tm_year % 100); // RTC only has two digits for year
     rtc6_SetComponent(RTCC_MONTH, 0xD0, tm_t->tm_mon + 1); // time.h gives January as zero, clock expects 1
@@ -162,7 +160,7 @@ void rtc6_SetTime2(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8
     rtc6_SetComponent(RTCC_DATE, 0x00, day);
     rtc6_SetComponent(RTCC_MINUTES, 0x00, min);
     rtc6_SetComponent(RTCC_SECONDS, 0x80, 0);
-    rtc6_SetComponent(RTCC_HOUR, 0x00, hour);    
+    rtc6_SetComponent(RTCC_HOUR, 0x00, hour);
 }
 
 static uint8_t rtc6_GetComponent(uint8_t location, uint8_t mask){
