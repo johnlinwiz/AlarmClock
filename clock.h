@@ -85,5 +85,6 @@ void clock_Initialize();
 void clock_SetHour(int hour);
 time_t clock_GetTime(void);
 void clock_SetMinute(int minute);
+void clock_SetTime(int year, int month, int day, int hour, int minute);
 
 #endif

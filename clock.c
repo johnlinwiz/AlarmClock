@@ -52,6 +52,15 @@ void clock_SetMinute(int minute){
     setComponent(RTCC_MINUTES, 0x00, minute);
 }
 
+void clock_SetTime(int year, int month, int day, int hour, int minute){    
+    setComponent(RTCC_YEAR, 0x00, year % 100); // RTC only has two digits for year
+    setComponent(RTCC_MONTH, 0xD0, month); // time.h gives January as zero, clock expects 1
+    setComponent(RTCC_DATE, 0x00, day);
+    setComponent(RTCC_MINUTES, 0x00, minute);
+    setComponent(RTCC_SECONDS, 0x80, 0);
+    setComponent(RTCC_HOUR, 0x00, hour);
+}
+
 time_t clock_GetTime(void){
     struct tm tm_t;
     memset(&tm_t, 0, sizeof (tm_t));

@@ -16,6 +16,7 @@
         <itemPath>mcc_generated_files/interrupt_manager.h</itemPath>
         <itemPath>mcc_generated_files/mcc.h</itemPath>
         <itemPath>mcc_generated_files/spi2.h</itemPath>
+        <itemPath>mcc_generated_files/RTC6_example.h</itemPath>
       </logicalFolder>
       <itemPath>oled.h</itemPath>
       <itemPath>clock.h</itemPath>
@@ -40,6 +41,7 @@
         <itemPath>mcc_generated_files/mcc.c</itemPath>
         <itemPath>mcc_generated_files/device_config.c</itemPath>
         <itemPath>mcc_generated_files/spi2.c</itemPath>
+        <itemPath>mcc_generated_files/RTC6_example.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>oled.c</itemPath>

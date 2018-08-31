@@ -32,7 +32,8 @@ void main(void)
 }
 
 void SetupClock(){
-    clock_SetHour(10);
-    clock_SetMinute(13);
+    //clock_SetTime(1999, 8, 30, 9, 56);
+    //clock_SetHour(10);
+    //clock_SetMinute(13);
     __delay_ms(1000);
 }
