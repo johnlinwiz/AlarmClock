@@ -23,8 +23,8 @@
 #include <stdint.h>
 #include <string.h>
 #include "RTC6.h"
-#include "mcc.h"
-#include "drivers/i2c_simple_master.h"
+#include "mcc_generated_files/mcc.h"
+#include "mcc_generated_files/drivers/i2c_simple_master.h"
 
 #define EEADDR 0x64
 #define RTCC_ADDR 0x6F //0x57

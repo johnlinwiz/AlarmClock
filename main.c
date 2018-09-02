@@ -1,7 +1,6 @@
 #include "mcc_generated_files/mcc.h"
 #include "oled.h"
-#include "clock.h"
-#include "mcc_generated_files/RTC6.h"
+#include "RTC6.h"
 
 void SetupClock();
 void rtc_Example();
@@ -11,6 +10,7 @@ void main(void)
     // initialize the device
     SYSTEM_Initialize();
     OLED_Initialize();
+    rtc6_Initialize();
     SetupClock();
     
     INTERRUPT_GlobalInterruptEnable();
@@ -37,11 +37,11 @@ void rtc_Example(){
         tm_t = localtime(&getTime);
         sprintf(timeStr, "%02d:%02d:%02d\n", tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
         Write_String(timeStr);
-        __delay_ms(1000);
+        __delay_ms(10);
     }
 }
 
 void SetupClock(){
-    rtc6_SetTime2(1999, 8, 30, 8, 45);
+    rtc6_SetTime2(1999, 8, 30, 8, 54);
     __delay_ms(20);
 }

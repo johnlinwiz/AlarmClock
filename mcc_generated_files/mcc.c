@@ -53,7 +53,6 @@ void SYSTEM_Initialize(void)
     PIN_MANAGER_Initialize();
     OSCILLATOR_Initialize();
     SPI2_Initialize();
-    rtc6_Initialize();
 }
 
 void OSCILLATOR_Initialize(void)
