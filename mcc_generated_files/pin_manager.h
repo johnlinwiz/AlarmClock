@@ -79,6 +79,26 @@
 #define OLED_CS_SetAnalogMode()      do { ANSELAbits.ANSA3 = 1; } while(0)
 #define OLED_CS_SetDigitalMode()     do { ANSELAbits.ANSA3 = 0; } while(0)
 
+// get/set Clock_Alarm aliases
+#define Clock_Alarm_TRIS                 TRISBbits.TRISB0
+#define Clock_Alarm_LAT                  LATBbits.LATB0
+#define Clock_Alarm_PORT                 PORTBbits.RB0
+#define Clock_Alarm_WPU                  WPUBbits.WPUB0
+#define Clock_Alarm_OD                   ODCONBbits.ODCB0
+#define Clock_Alarm_ANS                  ANSELBbits.ANSB0
+#define Clock_Alarm_SetHigh()            do { LATBbits.LATB0 = 1; } while(0)
+#define Clock_Alarm_SetLow()             do { LATBbits.LATB0 = 0; } while(0)
+#define Clock_Alarm_Toggle()             do { LATBbits.LATB0 = ~LATBbits.LATB0; } while(0)
+#define Clock_Alarm_GetValue()           PORTBbits.RB0
+#define Clock_Alarm_SetDigitalInput()    do { TRISBbits.TRISB0 = 1; } while(0)
+#define Clock_Alarm_SetDigitalOutput()   do { TRISBbits.TRISB0 = 0; } while(0)
+#define Clock_Alarm_SetPullup()          do { WPUBbits.WPUB0 = 1; } while(0)
+#define Clock_Alarm_ResetPullup()        do { WPUBbits.WPUB0 = 0; } while(0)
+#define Clock_Alarm_SetPushPull()        do { ODCONBbits.ODCB0 = 0; } while(0)
+#define Clock_Alarm_SetOpenDrain()       do { ODCONBbits.ODCB0 = 1; } while(0)
+#define Clock_Alarm_SetAnalogMode()      do { ANSELBbits.ANSB0 = 1; } while(0)
+#define Clock_Alarm_SetDigitalMode()     do { ANSELBbits.ANSB0 = 0; } while(0)
+
 // get/set SCK2 aliases
 #define SCK2_TRIS                 TRISBbits.TRISB1
 #define SCK2_LAT                  LATBbits.LATB1

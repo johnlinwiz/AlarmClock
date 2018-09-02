@@ -114,7 +114,11 @@ void rtc6_Initialize(void) {
     dateTime.day = (rtcc_read(RTCC_DAY) & 0x07);
     rtcc_write(RTCC_DAY, (dateTime.day | 0x08));
     dateTime.sec = rtcc_read(RTCC_SECONDS);
-
+    rtcc_write(RTCC_SECONDS, (dateTime.sec | 0x00));
+    dateTime.hr = rtcc_read(RTCC_HOUR) | 0x00;
+    rtcc_write(RTCC_HOUR, (dateTime.hr | 0x00));
+    dateTime.min = rtcc_read(RTCC_MINUTES) | 0x00;
+    rtcc_write(RTCC_MINUTES, (dateTime.min | 0x00));
     //Configure Control Register - SQWE=1, ALM0 = 00 {No Alarms Activated},
     //                             RS2, RS1, RS0 = 000 {1 HZ}
     rtcc_write(CONTROL_REG, ALM_NO + SQWE + MFP_01H);
@@ -128,7 +132,7 @@ void rtc6_Initialize(void) {
 
     // Configure external battery enable BIT and clear the VBAT flag
     rtcc_write(RTCC_DAY, dateTime.day | (VBATEN & VBAT_CLR));
-
+    
 }
 
 void rtc6_EnableAlarms(bool alarm0, bool alarm1){
@@ -182,13 +186,10 @@ time_t rtc6_GetTime(void) {
     return mktime(&tm_t);
 }
 
-void rtc6_SetAlarm0(struct tm tm_t, bool almpol, uint8_t mask){
+void rtc6_SetAlarm0(struct tm tm_t){
     rtcc_write(ALARM0_SECONDS, tm_t.tm_sec);
     rtcc_write(ALARM0_MINUTES, tm_t.tm_min);
     rtcc_write(ALARM0_HOUR, tm_t.tm_hour);
-    rtcc_write(ALARM0_DATE, tm_t.tm_mday);
-    rtcc_write(ALARM0_MONTH, tm_t.tm_mon + 1); // time.h gives January as zero, clock expects 1
-    rtcc_write(ALARM0_DAY, tm_t.tm_wday | almpol << 7 | mask << 4);
 }
 
 void rtc6_ClearAlarm0(void){
@@ -196,13 +197,10 @@ void rtc6_ClearAlarm0(void){
     rtcc_write(ALARM0_DAY, reg);
 }
 
-void rtc6_SetAlarm1(struct tm tm_t, bool almpol, uint8_t mask){
+void rtc6_SetAlarm1(struct tm tm_t){
     rtcc_write(ALARM1_SECONDS, tm_t.tm_sec);
     rtcc_write(ALARM1_MINUTES, tm_t.tm_min);
     rtcc_write(ALARM1_HOUR, tm_t.tm_hour);
-    rtcc_write(ALARM1_DATE, tm_t.tm_mday);
-    rtcc_write(ALARM1_MONTH, tm_t.tm_mon + 1); // time.h gives January as zero, clock expects 1
-    rtcc_write(ALARM1_DAY, tm_t.tm_wday | almpol << 7 | mask << 4);
 }
 
 void rtc6_ClearAlarm1(void){

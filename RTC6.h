@@ -35,8 +35,8 @@ typedef struct {
 void rtc6_Initialize(void);
 
 void rtc6_EnableAlarms(bool alarm0, bool alarm1);
-void rtc6_SetAlarm0(struct tm tm_t, bool almpol, uint8_t mask);
-void rtc6_SetAlarm1(struct tm tm_t, bool almpol, uint8_t mask);
+void rtc6_SetAlarm0(struct tm tm_t);
+void rtc6_SetAlarm1(struct tm tm_t);
 
 void rtc6_ClearAlarm0(void);
 void rtc6_ClearAlarm1(void);

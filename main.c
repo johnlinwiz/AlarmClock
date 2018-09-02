@@ -2,7 +2,6 @@
 #include "oled.h"
 #include "RTC6.h"
 
-void SetupClock();
 void pollClock();
 
 void main(void)
@@ -11,21 +10,15 @@ void main(void)
     SYSTEM_Initialize();
     OLED_Initialize();
     rtc6_Initialize();
-    SetupClock();
-    
-    INTERRUPT_GlobalInterruptEnable();
+    rtc6_EnableAlarms(true, true);
+    //INTERRUPT_GlobalInterruptEnable();
 
-    INTERRUPT_PeripheralInterruptEnable();
+    //INTERRUPT_PeripheralInterruptEnable();
     
     OLED_Clear();
     while(1){
         pollClock();
     }
-}
-
-void SetupClock(){
-    rtc6_SetTime2(1999, 8, 30, 14, 1);
-    __delay_ms(20);
 }
 
 void pollClock(){
