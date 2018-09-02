@@ -19,7 +19,6 @@
         <itemPath>mcc_generated_files/RTC6_example.h</itemPath>
       </logicalFolder>
       <itemPath>oled.h</itemPath>
-      <itemPath>clock.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -45,7 +44,6 @@
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>oled.c</itemPath>
-      <itemPath>clock.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

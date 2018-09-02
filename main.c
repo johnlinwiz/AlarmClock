@@ -25,7 +25,6 @@ void rtc_Example(){
 
     struct tm *tm_t;
 
-    char buffer[80];
 
     memset(tm_t, 0, sizeof (tm_t));
 
@@ -34,17 +33,15 @@ void rtc_Example(){
     getTime = 0; //Time in Seconds   
     char timeStr[];
     while (1) {
-        while (1) {
-            getTime = rtc6_GetTime();
-            tm_t = localtime(&getTime);
-            sprintf(timeStr, "%02d:%02d:%02d\n", tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
-            Write_String(timeStr);
-            __delay_ms(1000);
-        }
+        getTime = rtc6_GetTime();
+        tm_t = localtime(&getTime);
+        sprintf(timeStr, "%02d:%02d:%02d\n", tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
+        Write_String(timeStr);
+        __delay_ms(1000);
     }
 }
 
 void SetupClock(){
-    rtc6_SetTime2(1999, 8, 30, 5, 12);
+    rtc6_SetTime2(1999, 8, 30, 8, 45);
     __delay_ms(20);
 }
