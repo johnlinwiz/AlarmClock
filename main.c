@@ -42,6 +42,6 @@ void rtc_Example(){
 }
 
 void SetupClock(){
-    rtc6_SetTime2(1999, 8, 30, 8, 54);
+  //  rtc6_SetTime2(1999, 8, 30, 10, 2);
     __delay_ms(20);
 }
