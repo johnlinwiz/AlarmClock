@@ -79,6 +79,46 @@
 #define OLED_CS_SetAnalogMode()      do { ANSELAbits.ANSA3 = 1; } while(0)
 #define OLED_CS_SetDigitalMode()     do { ANSELAbits.ANSA3 = 0; } while(0)
 
+// get/set LED_Night aliases
+#define LED_Night_TRIS                 TRISAbits.TRISA4
+#define LED_Night_LAT                  LATAbits.LATA4
+#define LED_Night_PORT                 PORTAbits.RA4
+#define LED_Night_WPU                  WPUAbits.WPUA4
+#define LED_Night_OD                   ODCONAbits.ODCA4
+#define LED_Night_ANS                  ANSELAbits.ANSA4
+#define LED_Night_SetHigh()            do { LATAbits.LATA4 = 1; } while(0)
+#define LED_Night_SetLow()             do { LATAbits.LATA4 = 0; } while(0)
+#define LED_Night_Toggle()             do { LATAbits.LATA4 = ~LATAbits.LATA4; } while(0)
+#define LED_Night_GetValue()           PORTAbits.RA4
+#define LED_Night_SetDigitalInput()    do { TRISAbits.TRISA4 = 1; } while(0)
+#define LED_Night_SetDigitalOutput()   do { TRISAbits.TRISA4 = 0; } while(0)
+#define LED_Night_SetPullup()          do { WPUAbits.WPUA4 = 1; } while(0)
+#define LED_Night_ResetPullup()        do { WPUAbits.WPUA4 = 0; } while(0)
+#define LED_Night_SetPushPull()        do { ODCONAbits.ODCA4 = 0; } while(0)
+#define LED_Night_SetOpenDrain()       do { ODCONAbits.ODCA4 = 1; } while(0)
+#define LED_Night_SetAnalogMode()      do { ANSELAbits.ANSA4 = 1; } while(0)
+#define LED_Night_SetDigitalMode()     do { ANSELAbits.ANSA4 = 0; } while(0)
+
+// get/set LED_Day aliases
+#define LED_Day_TRIS                 TRISAbits.TRISA5
+#define LED_Day_LAT                  LATAbits.LATA5
+#define LED_Day_PORT                 PORTAbits.RA5
+#define LED_Day_WPU                  WPUAbits.WPUA5
+#define LED_Day_OD                   ODCONAbits.ODCA5
+#define LED_Day_ANS                  ANSELAbits.ANSA5
+#define LED_Day_SetHigh()            do { LATAbits.LATA5 = 1; } while(0)
+#define LED_Day_SetLow()             do { LATAbits.LATA5 = 0; } while(0)
+#define LED_Day_Toggle()             do { LATAbits.LATA5 = ~LATAbits.LATA5; } while(0)
+#define LED_Day_GetValue()           PORTAbits.RA5
+#define LED_Day_SetDigitalInput()    do { TRISAbits.TRISA5 = 1; } while(0)
+#define LED_Day_SetDigitalOutput()   do { TRISAbits.TRISA5 = 0; } while(0)
+#define LED_Day_SetPullup()          do { WPUAbits.WPUA5 = 1; } while(0)
+#define LED_Day_ResetPullup()        do { WPUAbits.WPUA5 = 0; } while(0)
+#define LED_Day_SetPushPull()        do { ODCONAbits.ODCA5 = 0; } while(0)
+#define LED_Day_SetOpenDrain()       do { ODCONAbits.ODCA5 = 1; } while(0)
+#define LED_Day_SetAnalogMode()      do { ANSELAbits.ANSA5 = 1; } while(0)
+#define LED_Day_SetDigitalMode()     do { ANSELAbits.ANSA5 = 0; } while(0)
+
 // get/set Clock_Alarm aliases
 #define Clock_Alarm_TRIS                 TRISBbits.TRISB0
 #define Clock_Alarm_LAT                  LATBbits.LATB0
