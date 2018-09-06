@@ -16,7 +16,8 @@ void main(void)
     rtc6_SetTime2(2018, 9, 6, 9, 10);
     struct tm alarm0;
     alarm0.tm_hour = 9;
-    alarm0.tm_min = 11;
+    alarm0.tm_min = 10;
+    alarm0.tm_sec = 10;
     rtc6_ClearAlarm0();
     rtc6_ClearAlarm1();
     rtc6_EnableAlarms(true, false);
@@ -25,6 +26,8 @@ void main(void)
     INTERRUPT_GlobalInterruptEnable();
 
     INTERRUPT_PeripheralInterruptEnable();
+    
+    INT_SetInterruptHandler(clock_Interrupt);
     
     OLED_Clear();
     while(1){

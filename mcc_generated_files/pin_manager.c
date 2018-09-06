@@ -70,7 +70,7 @@ void PIN_MANAGER_Initialize(void)
     */
     TRISE = 0x07;
     TRISA = 0xC7;
-    TRISB = 0xF4;
+    TRISB = 0xF5;
     TRISC = 0xFB;
     TRISD = 0xFE;
 
@@ -79,7 +79,7 @@ void PIN_MANAGER_Initialize(void)
     */
     ANSELD = 0xFE;
     ANSELC = 0xC3;
-    ANSELB = 0xE1;
+    ANSELB = 0xE0;
     ANSELE = 0x07;
     ANSELA = 0xC7;
 
@@ -106,6 +106,8 @@ void PIN_MANAGER_Initialize(void)
 
 
    
+    // Enable IOCI interrupt 
+    PIE0bits.IOCIE = 1; 
     
 	
     SSP1CLKPPSbits.SSP1CLKPPS = 0x13;   //RC3->MSSP1:SCL1;    
@@ -114,6 +116,7 @@ void PIN_MANAGER_Initialize(void)
     RC3PPS = 0x14;   //RC3->MSSP1:SCL1;    
     RC4PPS = 0x15;   //RC4->MSSP1:SDA1;    
     RB3PPS = 0x17;   //RB3->MSSP2:SDO2;    
+    INTPPSbits.INTPPS = 0x08;   //RB0->EXT_INT:INT;    
     SSP2CLKPPSbits.SSP2CLKPPS = 0x09;   //RB1->MSSP2:SCK2;    
     SSP2DATPPSbits.SSP2DATPPS = 0x0A;   //RB2->MSSP2:SDI2;    
 }

@@ -53,6 +53,7 @@
 #include "interrupt_manager.h"
 #include "spi2.h"
 #include "i2c1_driver.h"
+#include "ext_int.h"
 #include "drivers/i2c_simple_master.h"
 #include "drivers/i2c_master.h"
 
