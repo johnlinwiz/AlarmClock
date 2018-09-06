@@ -18,6 +18,9 @@
 
     MICROCHIP PROVIDES THIS SOFTWARE CONDITIONALLY UPON YOUR ACCEPTANCE OF THESE
     TERMS.
+  * 
+  * @ModifiedBy
+  * Sean Wernimont (@swernimo)
  */
 
 #include <stdint.h>
