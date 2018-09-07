@@ -1,6 +1,7 @@
 #include "mcc_generated_files/mcc.h"
 #include "oled.h"
 #include "RTC6.h"
+#include "mcc_generated_files/interrupt_manager.h"
 
 void pollClock();
 void clock_Interrupt();
@@ -11,6 +12,8 @@ void main(void)
     SYSTEM_Initialize();
     OLED_Initialize();
     rtc6_Initialize();
+    //IOCBP0 = 1;//setting the Interrupt On Change Postive Edge Register
+    //IOCBF0 = 0;//clearing the interrupt flag for RBO
     LED_Day_LAT = LOW;
     LED_Night_LAT = LOW;
     rtc6_SetTime2(2018, 9, 6, 9, 10);
@@ -30,6 +33,38 @@ void main(void)
     OLED_Clear();
     while(1){
         pollClock();
+    }
+}
+
+void interrupt INTERRUPT_InterruptManager (void)
+{
+    // interrupt handler
+    if(PIE0bits.IOCIE == 1 && PIR0bits.IOCIF == 1)
+    {
+        PIN_MANAGER_IOC();
+    }
+    else if(INTCONbits.PEIE == 1)
+    {
+        if(PIE3bits.BCL1IE == 1 && PIR3bits.BCL1IF == 1)
+        {
+            i2c1_driver_busCollisionISR();
+        } 
+        else if(PIE3bits.SSP1IE == 1 && PIR3bits.SSP1IF == 1)
+        {
+            i2c1_driver_i2cISR();
+        } 
+        else
+        {
+            //Unhandled Interrupt
+        }
+    }
+    else if (IOCBF0 == 1){
+        clock_Interrupt();
+        IOCBF0 = 0;
+    }
+    else
+    {
+        //Unhandled Interrupt
     }
 }
 
