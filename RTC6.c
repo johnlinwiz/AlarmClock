@@ -79,6 +79,9 @@ void rtc6_EnableAlarms(bool alarm0, bool alarm1){
     uint8_t reg = rtcc_read(CONTROL_REG);
     reg = (reg & 0xCF) | (alarm0 << 4) | (alarm1 << 5);
     rtcc_write(CONTROL_REG, reg);
+    uint8_t weekDayReg = rtcc_read(ALARM0_DAY);
+    weekDayReg |= (1 << 7);
+    rtcc_write(ALARM0_DAY, weekDayReg);
 }
 
 static void rtc6_SetComponent(uint8_t location, uint8_t mask, uint8_t time){
@@ -132,20 +135,16 @@ void rtc6_SetAlarm0(struct tm tm_t){
     rtcc_write(ALARM0_HOUR, tm_t.tm_hour);
 }
 
-void rtc6_ClearAlarm0(void){
-    uint8_t reg = rtcc_read(ALARM0_DAY);
-    rtcc_write(ALARM0_DAY, reg);
-}
-
 void rtc6_SetAlarm1(struct tm tm_t){
     rtcc_write(ALARM1_SECONDS, tm_t.tm_sec);
     rtcc_write(ALARM1_MINUTES, tm_t.tm_min);
     rtcc_write(ALARM1_HOUR, tm_t.tm_hour);
 }
 
-void rtc6_ClearAlarm1(void){
-    uint8_t reg = rtcc_read(ALARM1_DAY);
-    rtcc_write(ALARM1_DAY, reg);
+void rtc6_ClearAlarmInterruptFlag(uint8_t alarm){
+    uint8_t reg = rtcc_read(alarm);
+    reg |= (0 << 3);
+    rtcc_write(alarm, reg);
 }
 
 /******************************************************************************/

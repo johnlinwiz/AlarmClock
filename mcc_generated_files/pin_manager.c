@@ -116,7 +116,6 @@ void PIN_MANAGER_Initialize(void)
     RC3PPS = 0x14;   //RC3->MSSP1:SCL1;    
     RC4PPS = 0x15;   //RC4->MSSP1:SDA1;    
     RB3PPS = 0x17;   //RB3->MSSP2:SDO2;    
-    INTPPSbits.INTPPS = 0x08;   //RB0->EXT_INT:INT;    
     SSP2CLKPPSbits.SSP2CLKPPS = 0x09;   //RB1->MSSP2:SCK2;    
     SSP2DATPPSbits.SSP2DATPPS = 0x0A;   //RB2->MSSP2:SDI2;    
 }

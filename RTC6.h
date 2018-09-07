@@ -104,9 +104,6 @@ void rtc6_EnableAlarms(bool alarm0, bool alarm1);
 void rtc6_SetAlarm0(struct tm tm_t);
 void rtc6_SetAlarm1(struct tm tm_t);
 
-void rtc6_ClearAlarm0(void);
-void rtc6_ClearAlarm1(void);
-
 void rtc6_SetTime(time_t);
 void rtc6_SetTime2(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min);
 time_t rtc6_GetTime(void);
@@ -114,5 +111,6 @@ time_t rtc6_GetTime(void);
 uint8_t rtc6_ReadByteEEPROM(uint8_t addr);
 void rtc6_WriteByteEEPROM(uint8_t addr, uint8_t data);
 uint8_t rtcc_read(uint8_t addr);
+void rtc6_ClearAlarmInterruptFlag(uint8_t alarm);
 
 #endif

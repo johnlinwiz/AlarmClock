@@ -18,8 +18,6 @@ void main(void)
     alarm0.tm_hour = 9;
     alarm0.tm_min = 10;
     alarm0.tm_sec = 10;
-    rtc6_ClearAlarm0();
-    rtc6_ClearAlarm1();
     rtc6_EnableAlarms(true, false);
     rtc6_SetAlarm0(alarm0);
     
@@ -27,7 +25,7 @@ void main(void)
 
     INTERRUPT_PeripheralInterruptEnable();
     
-    INT_SetInterruptHandler(clock_Interrupt);
+    //INT_SetInterruptHandler(clock_Interrupt);
     
     OLED_Clear();
     while(1){
@@ -36,10 +34,9 @@ void main(void)
 }
 
 void pollClock(){
-    volatile time_t getTime, setTime;
+    volatile time_t getTime;
     struct tm *tm_t;
     memset(tm_t, 0, sizeof (tm_t));
-    setTime = 1503870020; //Time in Seconds
     getTime = 0; //Time in Seconds   
     char timeStr[];
     getTime = rtc6_GetTime();
@@ -62,8 +59,10 @@ void clock_Interrupt(){
     if(alarm0){
         LED_Day_LAT = HIGH;
         LED_Night_LAT = LOW;
+        rtc6_ClearAlarmInterruptFlag(ALARM0_DAY);
     }else if (alarm1){
         LED_Day_LAT = LOW;
         LED_Night_LAT = HIGH;
+        rtc6_ClearAlarmInterruptFlag(ALARM1_DAY);
     }
 }
