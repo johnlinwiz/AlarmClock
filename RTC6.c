@@ -145,7 +145,8 @@ void rtc6_SetAlarm1(struct tm tm_t){
 
 void rtc6_ClearAlarmInterruptFlag(uint8_t alarm){
     uint8_t reg = rtcc_read(alarm);
-    reg |= (0 << 3);
+    //reg |= (0 << 3);
+    reg = ClearBit(reg, 3);
     rtcc_write(alarm, reg);
 }
 

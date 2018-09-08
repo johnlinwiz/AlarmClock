@@ -29,6 +29,7 @@
 #include <time.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include "utilities.h"
 
 typedef struct {
     int sec, min, hr;

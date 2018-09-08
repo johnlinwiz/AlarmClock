@@ -1,6 +1,7 @@
 #include "mcc_generated_files/mcc.h"
 #include "oled.h"
 #include "RTC6.h"
+#include "utilities.h"
 
 void pollClock();
 void clock_Interrupt();
@@ -42,6 +43,7 @@ void setAlarms(){
     struct tm alarm0;
     alarm0.tm_hour = 9;
     alarm0.tm_min = 11;
+    
     struct tm alarm1;
     alarm1.tm_hour = 9;
     alarm1.tm_min = 12;
@@ -61,8 +63,10 @@ void clock_Interrupt(){
     int alarm0 = rtcc_read(ALARM0_DAY);
     int alarm1 = rtcc_read(ALARM1_DAY);
     
-    bool alarm0Triggered = alarm0 & (1 << 3);
-    bool alarm1Triggered = alarm1 & (1 << 3);
+    //bool alarm0Triggered = alarm0 & (1 << 3);
+    //bool alarm1Triggered = alarm1 & (1 << 3);
+    bool alarm0Triggered = IsBitSet(alarm0, 3);
+    bool alarm1Triggered = IsBitSet(alarm1, 3);
     
     if(alarm0Triggered){
         LED_Day_LAT = HIGH;
