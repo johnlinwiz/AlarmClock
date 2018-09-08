@@ -133,12 +133,14 @@ void rtc6_SetAlarm0(struct tm tm_t){
     rtcc_write(ALARM0_SECONDS, tm_t.tm_sec);
     rtcc_write(ALARM0_MINUTES, tm_t.tm_min);
     rtcc_write(ALARM0_HOUR, tm_t.tm_hour);
+    rtc6_ClearAlarmInterruptFlag(ALARM0_DAY);
 }
 
 void rtc6_SetAlarm1(struct tm tm_t){
     rtcc_write(ALARM1_SECONDS, tm_t.tm_sec);
     rtcc_write(ALARM1_MINUTES, tm_t.tm_min);
     rtcc_write(ALARM1_HOUR, tm_t.tm_hour);
+    rtc6_ClearAlarmInterruptFlag(ALARM1_DAY);
 }
 
 void rtc6_ClearAlarmInterruptFlag(uint8_t alarm){

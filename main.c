@@ -1,10 +1,11 @@
 #include "mcc_generated_files/mcc.h"
 #include "oled.h"
 #include "RTC6.h"
-#include "mcc_generated_files/interrupt_manager.h"
 
 void pollClock();
 void clock_Interrupt();
+void ConfigureInterrupts();
+void setAlarms();
 
 void main(void)
 {
@@ -12,28 +13,73 @@ void main(void)
     SYSTEM_Initialize();
     OLED_Initialize();
     rtc6_Initialize();
-    //IOCBP0 = 1;//setting the Interrupt On Change Postive Edge Register
-    //IOCBF0 = 0;//clearing the interrupt flag for RBO
+    ConfigureInterrupts();
     LED_Day_LAT = LOW;
     LED_Night_LAT = LOW;
     rtc6_SetTime2(2018, 9, 6, 9, 10);
-    struct tm alarm0;
-    alarm0.tm_hour = 9;
-    alarm0.tm_min = 10;
-    alarm0.tm_sec = 10;
-    rtc6_EnableAlarms(true, false);
-    rtc6_SetAlarm0(alarm0);
-    
-    INTERRUPT_GlobalInterruptEnable();
-
-    INTERRUPT_PeripheralInterruptEnable();
-    
-    //INT_SetInterruptHandler(clock_Interrupt);
-    
+    setAlarms();
     OLED_Clear();
     while(1){
         pollClock();
+        clock_Interrupt();
     }
+}
+
+void pollClock(){
+    volatile time_t getTime;
+    struct tm *tm_t;
+    memset(tm_t, 0, sizeof (tm_t));
+    getTime = 0; //Time in Seconds   
+    char timeStr[];
+    getTime = rtc6_GetTime();
+    tm_t = localtime(&getTime);
+    sprintf(timeStr, "%02d:%02d:%02d\n", tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
+    Write_String(timeStr);
+    __delay_ms(10);
+}
+
+void setAlarms(){
+    struct tm alarm0;
+    alarm0.tm_hour = 9;
+    alarm0.tm_min = 11;
+    struct tm alarm1;
+    alarm1.tm_hour = 9;
+    alarm1.tm_min = 12;
+    
+    rtc6_EnableAlarms(true, true);
+    rtc6_SetAlarm0(alarm0);
+    rtc6_SetAlarm1(alarm1);
+}
+
+void clock_Interrupt(){
+    /*
+     * read the clock register 0x0D bit 3 to see if alarm 0 was triggered
+     * read the clock register 0x14 bit 3 to see if alarm 1 was triggered
+     * if alarm 0 was triggered start day and stop night
+     * if alarm 1 was triggered start night and stop day
+     */
+    int alarm0 = rtcc_read(ALARM0_DAY);
+    int alarm1 = rtcc_read(ALARM1_DAY);
+    
+    bool alarm0Triggered = alarm0 & (1 << 3);
+    bool alarm1Triggered = alarm1 & (1 << 3);
+    
+    if(alarm0Triggered){
+        LED_Day_LAT = HIGH;
+        LED_Night_LAT = LOW;
+        rtc6_ClearAlarmInterruptFlag(ALARM0_DAY);
+    }else if (alarm1Triggered){
+        LED_Day_LAT = LOW;
+        LED_Night_LAT = HIGH;
+        rtc6_ClearAlarmInterruptFlag(ALARM1_DAY);
+    }
+}
+
+void ConfigureInterrupts(){
+    INTCONbits.PEIE = 1; //enabling global interrupts
+    INTCONbits.GIE = 1; //enabling peripheral interrupts
+    IOCBP0 = 1;//setting the Interrupt On Change Positive Edge Register
+    IOCBF0 = 0;//clearing the interrupt flag for RBO
 }
 
 void interrupt INTERRUPT_InterruptManager (void)
@@ -65,39 +111,5 @@ void interrupt INTERRUPT_InterruptManager (void)
     else
     {
         //Unhandled Interrupt
-    }
-}
-
-void pollClock(){
-    volatile time_t getTime;
-    struct tm *tm_t;
-    memset(tm_t, 0, sizeof (tm_t));
-    getTime = 0; //Time in Seconds   
-    char timeStr[];
-    getTime = rtc6_GetTime();
-    tm_t = localtime(&getTime);
-    sprintf(timeStr, "%02d:%02d:%02d\n", tm_t->tm_hour, tm_t->tm_min, tm_t->tm_sec);
-    Write_String(timeStr);
-    __delay_ms(10);
-}
-
-void clock_Interrupt(){
-    /*
-     * read the clock register 0x0D bit 3 to see if alarm 0 was triggered
-     * read the clock register 0x14 bit 3 to see if alarm 1 was triggered
-     * if alarm 0 was triggered start day and stop night
-     * if alarm 1 was triggered start night and stop day
-     */
-    bool alarm0 = rtcc_read(ALARM0_DAY) >> 2;
-    bool alarm1 = rtcc_read(ALARM1_DAY) >> 2;
-    
-    if(alarm0){
-        LED_Day_LAT = HIGH;
-        LED_Night_LAT = LOW;
-        rtc6_ClearAlarmInterruptFlag(ALARM0_DAY);
-    }else if (alarm1){
-        LED_Day_LAT = LOW;
-        LED_Night_LAT = HIGH;
-        rtc6_ClearAlarmInterruptFlag(ALARM1_DAY);
     }
 }

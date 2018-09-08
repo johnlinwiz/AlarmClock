@@ -106,8 +106,6 @@ void PIN_MANAGER_Initialize(void)
 
 
    
-    // Enable IOCI interrupt 
-    PIE0bits.IOCIE = 1; 
     
 	
     SSP1CLKPPSbits.SSP1CLKPPS = 0x13;   //RC3->MSSP1:SCL1;    
